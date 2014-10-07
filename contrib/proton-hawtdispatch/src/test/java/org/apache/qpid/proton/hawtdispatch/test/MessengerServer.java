@@ -18,7 +18,7 @@ public class MessengerServer {
 	public static final String REJECT_ME = "*REJECT-ME*";
 	private int timeout = 1000;
 	private String host = "127.0.0.1";
-	private int port = 55555;
+	private int port = 5672;
 	private Messenger msgr;
 	private AtomicInteger messagesReceived = new AtomicInteger(0);
 	private AtomicInteger messagesSent = new AtomicInteger(0);

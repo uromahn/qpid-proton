@@ -18,8 +18,10 @@ package org.apache.qpid.proton.hawtdispatch.api;
 
 import org.fusesource.hawtdispatch.DispatchQueue;
 import org.fusesource.hawtdispatch.transport.TcpTransport;
+import org.fusesource.hawtdispatch.transport.Transport;
 
 import javax.net.ssl.SSLContext;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
@@ -87,6 +89,8 @@ public class AmqpConnectOptions implements Cloneable {
     String remoteContainerId;
     String user;
     String password;
+    // New connect option added to support operation as a server
+    Transport hawtdispatchServerTransport = null;
 
 
     @Override
@@ -224,5 +228,13 @@ public class AmqpConnectOptions implements Cloneable {
 
     public void setUseLocalHost(boolean useLocalHost) {
         this.useLocalHost = useLocalHost;
+    }
+    
+    public Transport getServerTransport() {
+    	return hawtdispatchServerTransport;
+    }
+    
+    public void setServerTransport(Transport hawtdispatchServerTransport) {
+		this.hawtdispatchServerTransport = hawtdispatchServerTransport;
     }
 }

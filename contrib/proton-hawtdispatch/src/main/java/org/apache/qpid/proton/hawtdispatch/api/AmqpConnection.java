@@ -47,7 +47,13 @@ public class AmqpConnection extends AmqpEndpointBase  {
     }
 
     private AmqpConnection(AmqpConnectOptions options) {
-        transport = AmqpTransport.connect(options);
+    	if(options.getServerTransport() != null) {
+    		// we have a server connection here, so call AmqpTransport.accept()
+			transport = AmqpTransport.accept(options.getServerTransport());
+    	} else {
+    		// we are a client, so create a connection to the remote server
+    	       transport = AmqpTransport.connect(options);
+    	}
         transport.setListener(new AmqpListener() {
             @Override
             public void processDelivery(Delivery delivery) {

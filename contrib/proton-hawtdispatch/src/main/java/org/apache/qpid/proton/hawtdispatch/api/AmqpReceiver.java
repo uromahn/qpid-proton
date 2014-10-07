@@ -21,6 +21,7 @@ import org.apache.qpid.proton.hawtdispatch.impl.Defer;
 import org.apache.qpid.proton.engine.Delivery;
 import org.apache.qpid.proton.engine.Receiver;
 import org.apache.qpid.proton.amqp.messaging.Accepted;
+import org.apache.qpid.proton.amqp.messaging.Target;
 import org.fusesource.hawtbuf.Buffer;
 import org.fusesource.hawtbuf.ByteArrayOutputStream;
 
@@ -104,6 +105,10 @@ public class AmqpReceiver extends AmqpLink {
         drainInbound();
     }
 
+    public void setTarget(Target address) {
+    	this.receiver.setTarget(address);
+    }
+    
     public void drain() {
         defer(deferedDrain);
     }
